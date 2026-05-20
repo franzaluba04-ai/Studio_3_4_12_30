@@ -3,6 +3,7 @@ import franzMerrick from './portfolios/franz-merrick/profile'
 import ivanJethro from './portfolios/ivan-jethro/profile'
 import jamesIvan from './portfolios/james-ivan/profile'
 import josephIvan from './portfolios/joseph-ivan/profile'
+import JosephIvanPortfolio from './portfolios/joseph-ivan/FullPortfolio'
 import './App.css'
 
 const teamMembers = [franzMerrick, josephIvan, ivanJethro, jamesIvan]
@@ -79,43 +80,49 @@ function App() {
 
   return (
     <main className="app-shell">
-      <nav className="navbar" aria-label="Portfolio navigation">
-        <a
-          href="#dashboard"
-          className={`brand ${activeMemberId === 'dashboard' ? 'active' : ''}`}
-          onClick={() => setActiveMemberId('dashboard')}
-        >
-          Studio 4-ITS
-        </a>
+      {activeMemberId !== 'joseph-ivan' && (
+        <nav className="navbar" aria-label="Portfolio navigation">
+          <a
+            href="#dashboard"
+            className={`brand ${activeMemberId === 'dashboard' ? 'active' : ''}`}
+            onClick={() => setActiveMemberId('dashboard')}
+          >
+            Studio 4-ITS
+          </a>
 
-        <div className="nav-links">
-          {teamMembers.map((member) => (
-            <a
-              key={member.id}
-              href={
-                member.portfolioUrl
-                  ? getExternalPortfolioHref(member.portfolioUrl)
-                  : `#${member.id}`
-              }
-              className={activeMemberId === member.id ? 'active' : ''}
-              onClick={(event) => {
-                if (member.portfolioUrl) {
-                  event.preventDefault()
-                  window.location.href = getExternalPortfolioHref(member.portfolioUrl)
-                  return
+          <div className="nav-links">
+            {teamMembers.map((member) => (
+              <a
+                key={member.id}
+                href={
+                  member.portfolioUrl
+                    ? getExternalPortfolioHref(member.portfolioUrl)
+                    : `#${member.id}`
                 }
+                className={activeMemberId === member.id ? 'active' : ''}
+                onClick={(event) => {
+                  if (member.portfolioUrl) {
+                    event.preventDefault()
+                    window.location.href = getExternalPortfolioHref(member.portfolioUrl)
+                    return
+                  }
 
-                setActiveMemberId(member.id)
-              }}
-            >
-              {member.name}
-            </a>
-          ))}
-        </div>
-      </nav>
+                  setActiveMemberId(member.id)
+                }}
+              >
+                {member.name}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
 
       {activeMember ? (
-        <MemberPortfolio member={activeMember} works={filteredWorks} />
+        activeMember.id === 'joseph-ivan' ? (
+          <JosephIvanPortfolio />
+        ) : (
+          <MemberPortfolio member={activeMember} works={filteredWorks} />
+        )
       ) : (
         <Dashboard works={filteredWorks} />
       )}
