@@ -163,9 +163,7 @@ function Dashboard({ works }) {
         <div className="team-panel" aria-label="Team members">
           {teamMembers.map((member) => (
             <article key={member.id} className="member-tile">
-              <div className="avatar" style={{ backgroundColor: member.color }}>
-                {member.name.slice(0, 1)}
-              </div>
+              <Avatar member={member} className="avatar" />
               <div>
                 <h2>{member.name}</h2>
                 <p>{member.role}</p>
@@ -184,6 +182,25 @@ function Dashboard({ works }) {
 
       <WorkGallery works={works} title="Shared Dashboard" />
     </>
+  )
+}
+
+function Avatar({ member, className }) {
+  if (member.image) {
+    return (
+      <img
+        className={className}
+        src={member.image}
+        alt={`${member.name} profile`}
+        loading="lazy"
+      />
+    )
+  }
+
+  return (
+    <div className={className} style={{ backgroundColor: member.color }}>
+      {member.name.slice(0, 1)}
+    </div>
   )
 }
 
