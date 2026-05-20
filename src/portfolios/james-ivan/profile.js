@@ -6,6 +6,7 @@ const jamesIvan = {
   bio: 'Connects design ideas with practical interactions that feel smooth and useful.',
   skills: ['JavaScript', 'Prototypes', 'Testing', 'Animation'],
   color: '#be123c',
+  image: 'team/james-ivan.jpg',
 }
 
 export default jamesIvan

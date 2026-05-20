@@ -194,6 +194,25 @@ function Dashboard({ works }) {
   )
 }
 
+function Avatar({ member, className }) {
+  if (member.image) {
+    return (
+      <img
+        className={className}
+        src={member.image}
+        alt={`${member.name} profile`}
+        loading="lazy"
+      />
+    )
+  }
+
+  return (
+    <div className={className} style={{ backgroundColor: member.color }}>
+      {member.name.slice(0, 1)}
+    </div>
+  )
+}
+
 function MemberPortfolio({ member, works }) {
   return (
     <>
