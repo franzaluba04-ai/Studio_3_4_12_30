@@ -146,9 +146,6 @@ function getExternalPortfolioHref(portfolioUrl) {
     return portfolioUrl
   }
 
-  if (/^https?:\/\//i.test(portfolioUrl)) {
-    return portfolioUrl
-  }
   const currentPath = window.location.pathname
   const appBasePath = currentPath.includes('/aluba-portfolio/')
     ? currentPath.split('/aluba-portfolio/')[0]
@@ -156,20 +153,6 @@ function getExternalPortfolioHref(portfolioUrl) {
   const normalizedBase = appBasePath.endsWith('/') ? appBasePath : `${appBasePath}/`
 
   return `${window.location.origin}${normalizedBase}${portfolioUrl}`
-}
-
-function getAppAssetHref(assetPath) {
-  if (/^https?:\/\//i.test(assetPath) || assetPath.startsWith('/')) {
-    return assetPath
-  }
-
-  const currentPath = window.location.pathname
-  const appBasePath = currentPath.includes('/aluba-portfolio/')
-    ? currentPath.split('/aluba-portfolio/')[0]
-    : currentPath.replace(/\/[^/]*$/, '')
-  const normalizedBase = appBasePath.endsWith('/') ? appBasePath : `${appBasePath}/`
-
-  return `${normalizedBase}${assetPath}`
 }
 
 function getAppAssetHref(assetPath) {
