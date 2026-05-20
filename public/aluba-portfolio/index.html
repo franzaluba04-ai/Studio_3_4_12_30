@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>aluba-portfolio</title>
+    <script>
+      const portfolioMarker = '/aluba-portfolio/'
+      const portfolioBasePath = window.location.pathname.includes(portfolioMarker)
+        ? window.location.pathname.split(portfolioMarker)[0] + portfolioMarker
+        : portfolioMarker
+
+      document.write(`<base href="${window.location.origin}${portfolioBasePath}">`)
+    </script>
     <style>
       .studio-back-button {
         position: fixed;
