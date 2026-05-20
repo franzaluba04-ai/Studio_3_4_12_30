@@ -6,6 +6,7 @@ const franzMerrick = {
   bio: 'Builds clean web pages with strong structure, clear navigation, and polished visual details.',
   skills: ['React', 'CSS', 'UI Layout', 'Web Design'],
   color: '#0f766e',
+  image: 'team/franz-merrick.jpg',
   portfolioUrl: 'aluba-portfolio/index.html',
 }
 
