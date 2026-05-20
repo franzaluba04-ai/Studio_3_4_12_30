@@ -6,6 +6,7 @@ const ivanJethro = {
   bio: 'Turns rough project ideas into clear descriptions, case studies, and user-focused narratives.',
   skills: ['Writing', 'Research', 'Editing', 'Planning'],
   color: '#4338ca',
+  portfolioUrl: 'https://jethro-dungog-r5rjw1jhd-jethrodungogs-projects.vercel.app/',
 }
 
 export default ivanJethro
