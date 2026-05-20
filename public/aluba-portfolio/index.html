@@ -61,5 +61,18 @@
       </svg>
     </a>
     <div id="root"></div>
+    <script>
+      const studioBackButton = document.querySelector('.studio-back-button')
+      const studioMarker = '/aluba-portfolio'
+      const markerIndex = window.location.pathname.indexOf(studioMarker)
+      const studioHomePath =
+        markerIndex >= 0 ? window.location.pathname.slice(0, markerIndex + 1) : './'
+
+      studioBackButton.href = `${window.location.origin}${studioHomePath}`
+      studioBackButton.addEventListener('click', (event) => {
+        event.preventDefault()
+        window.location.href = studioBackButton.href
+      })
+    </script>
   </body>
 </html>
