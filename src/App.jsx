@@ -135,6 +135,9 @@ function getPageFromHash() {
 }
 
 function getExternalPortfolioHref(portfolioUrl) {
+  if (/^https?:\/\//i.test(portfolioUrl)) {
+    return portfolioUrl
+  }
   const currentPath = window.location.pathname
   const appBasePath = currentPath.includes('/aluba-portfolio/')
     ? currentPath.split('/aluba-portfolio/')[0]
@@ -163,7 +166,13 @@ function Dashboard({ works }) {
         <div className="team-panel" aria-label="Team members">
           {teamMembers.map((member) => (
             <article key={member.id} className="member-tile">
-              <Avatar member={member} className="avatar" />
+              <div className="avatar" style={{ backgroundColor: member.color }}>
+                {member.avatarUrl ? (
+                  <img src={member.avatarUrl} alt={member.name} />
+                ) : (
+                  member.name.slice(0, 1)
+                )}
+              </div>
               <div>
                 <h2>{member.name}</h2>
                 <p>{member.role}</p>
@@ -209,7 +218,11 @@ function MemberPortfolio({ member, works }) {
     <>
       <section className="profile-hero">
         <div className="profile-mark" style={{ backgroundColor: member.color }}>
-          {member.name.slice(0, 1)}
+          {member.avatarUrl ? (
+            <img src={member.avatarUrl} alt={member.name} />
+          ) : (
+            member.name.slice(0, 1)
+          )}
         </div>
         <div>
           <p className="eyebrow">Individual Portfolio</p>
