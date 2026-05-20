@@ -147,6 +147,20 @@ function getExternalPortfolioHref(portfolioUrl) {
   return `${window.location.origin}${normalizedBase}${portfolioUrl}`
 }
 
+function getAppAssetHref(assetPath) {
+  if (/^https?:\/\//i.test(assetPath) || assetPath.startsWith('/')) {
+    return assetPath
+  }
+
+  const currentPath = window.location.pathname
+  const appBasePath = currentPath.includes('/aluba-portfolio/')
+    ? currentPath.split('/aluba-portfolio/')[0]
+    : currentPath.replace(/\/[^/]*$/, '')
+  const normalizedBase = appBasePath.endsWith('/') ? appBasePath : `${appBasePath}/`
+
+  return `${normalizedBase}${assetPath}`
+}
+
 function Dashboard({ works }) {
   const combinedCount = works.filter((work) => work.type === 'Combined Work').length
   const similarCount = works.filter((work) => work.type === 'Similar Work').length
@@ -166,13 +180,7 @@ function Dashboard({ works }) {
         <div className="team-panel" aria-label="Team members">
           {teamMembers.map((member) => (
             <article key={member.id} className="member-tile">
-              <div className="avatar" style={{ backgroundColor: member.color }}>
-                {member.avatarUrl ? (
-                  <img src={member.avatarUrl} alt={member.name} />
-                ) : (
-                  member.name.slice(0, 1)
-                )}
-              </div>
+              <Avatar member={member} className="avatar" />
               <div>
                 <h2>{member.name}</h2>
                 <p>{member.role}</p>
@@ -199,7 +207,7 @@ function Avatar({ member, className }) {
     return (
       <img
         className={className}
-        src={member.image}
+        src={getAppAssetHref(member.image)}
         alt={`${member.name} profile`}
         loading="lazy"
       />
@@ -217,13 +225,7 @@ function MemberPortfolio({ member, works }) {
   return (
     <>
       <section className="profile-hero">
-        <div className="profile-mark" style={{ backgroundColor: member.color }}>
-          {member.avatarUrl ? (
-            <img src={member.avatarUrl} alt={member.name} />
-          ) : (
-            member.name.slice(0, 1)
-          )}
-        </div>
+        <Avatar member={member} className="profile-mark" />
         <div>
           <p className="eyebrow">Individual Portfolio</p>
           <h1>{member.name}</h1>

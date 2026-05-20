@@ -147,6 +147,11 @@
   object-position: center;
 }
 
+img.profile-mark {
+  object-fit: cover;
+  object-position: center;
+}
+
 .avatar img,
 .profile-mark img {
   width: 100%;
